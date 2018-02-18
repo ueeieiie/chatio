@@ -8,6 +8,10 @@ import ChatApp from './ChatApp';
 // Component Style
 const AppStyle = styled.div`
 	width: 100%;
+
+	.title {
+		text-align: center;
+	}
 `;
 
 // App Component
@@ -19,7 +23,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<AppStyle>
-				<h1 style={{textAlign: 'center'}}>Chat</h1>
+				<h1 className="title">Chat</h1>
 				<ChatApp />
 			</AppStyle>
 		);

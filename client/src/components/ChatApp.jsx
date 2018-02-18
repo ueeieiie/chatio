@@ -23,10 +23,6 @@ export default class ChatApp extends React.Component {
 
 		this.socket = io('http://localhost:3000');
 
-		this.socket.on('RECEIVE_MESSAGE', ({username, message}) => {
-			addMessage({username, message})
-		});
-
 		const addMessage = ({username, message}) => {
 			// console.log(`SERVER DATA:__ username: ${username}, message: ${message}`,);
 			
@@ -35,6 +31,8 @@ export default class ChatApp extends React.Component {
 				// console.log('messages:', this.state.messages)
 			});
 		};
+
+		this.socket.on('RECEIVE_MESSAGE', addMessage);
 	}
 
 	state = {
@@ -46,18 +44,16 @@ export default class ChatApp extends React.Component {
 
 	sendMessage = message => {
 		const { username } = this.state;
-		// console.clear();
-		// console.log('username:', username);
-		// console.log('message:', message);
-
-		this.setState({message})
+		// console.log('before emit')
+		
+		// this.setState({message})
 		this.socket.emit('SEND_MESSAGE', {message, username});
+		// console.log(`after emit message: ${message}, username: ${username}`);
 	}
 
 	setUsername = (username) => {
 		this.setState({ username });
 	}
-
 
 	render() {
 		const { messages, username } = this.state;

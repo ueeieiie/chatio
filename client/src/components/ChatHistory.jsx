@@ -20,10 +20,13 @@ class ChatHistory extends React.Component  {
 	}
 
 	setScrollPosition = () => {
+		console.log('scrollTop:', this.chatElement.scrollTop)
+		console.log('scrollHeight:', this.chatElement.scrollHeight)
+
 		this.chatElement.scrollTop = this.chatElement.scrollHeight;
 	}
 
-	componentWillUpdate(){
+	componentDidUpdate(){
 		this.setScrollPosition();
 	}
 	
@@ -34,7 +37,11 @@ class ChatHistory extends React.Component  {
 			<ChatHistoryStyle innerRef={input => this.setRef(input)} >
 				{ 
 					messages.map((m, i) => (
-						<MessageTemplate key={i} name={m.username} message={m.message} />)	
+						<MessageTemplate 
+							key={i} 
+							name={m.username} 
+							message={m.message} 
+						/>)	
 					)
 				}
 			</ChatHistoryStyle>

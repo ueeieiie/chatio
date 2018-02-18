@@ -21,11 +21,16 @@ io.on('connection', (socket) => {
 	console.log('Connected: %s sockets are active', connections.length);
 
 	socket.on('SEND_MESSAGE', (data) => {
+		console.log('before send message', data)
 		io.emit("RECEIVE_MESSAGE", data);
+		console.log('after send message', data)
 	})
 
 	socket.on('disconnect', (data) => {
+		console.log('before disconnect')	
 		connections.splice(connections.indexOf('socket'), 1);
 		console.log('Disconnected: %s sockets are active', connections.length);
 	})
+
+	socket.on('error', console.error)
 });

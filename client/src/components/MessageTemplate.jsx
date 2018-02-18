@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MessageTemplateStyle = styled.div`
+	margin: 10px 0;
 	display: flex;
+
 	p, h5 {
 		margin: 0;
 		padding: 0;
@@ -15,7 +17,6 @@ const MessageTemplateStyle = styled.div`
 
 	.message {
 		flex: 1 1 auto;
-		margin-left: 10px;
 	}
 `;
 
