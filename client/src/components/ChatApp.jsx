@@ -23,13 +23,16 @@ export default class ChatApp extends React.Component {
 
 		this.socket = io('http://localhost:3000');
 
-		const addMessage = ({username, message}) => {
-			// console.log(`SERVER DATA:__ username: ${username}, message: ${message}`,);
+		const addMessage = async ({userId, username, message, avatar}) => {
+			// console.log({id, username, message, avatar});
 			
-			this.setState({messages: [...this.state.messages, {username, message}]},
-			() => {
-				// console.log('messages:', this.state.messages)
+			await this.setState({
+				messages: [
+					...this.state.messages, 
+					{userId, username, message, avatar}
+				]
 			});
+			
 		};
 
 		this.socket.on('RECEIVE_MESSAGE', addMessage);
@@ -37,38 +40,35 @@ export default class ChatApp extends React.Component {
 
 	state = {
 		messages: [],
-		users: [],
-		message: null,
-		username: null
+		user: null
 	};
 
-	sendMessage = message => {
-		const { username } = this.state;
-		// console.log('before emit')
-		
-		// this.setState({message})
-		this.socket.emit('SEND_MESSAGE', {message, username});
-		// console.log(`after emit message: ${message}, username: ${username}`);
+	sendMessage = async (message) => {
+		const { user } = this.state;
+		await this.socket.emit('SEND_MESSAGE', {message, user});
 	}
 
-	setUsername = (username) => {
-		this.setState({ username });
+	setUser = async (user) => {
+		await this.socket.emit('REGISTER_USER', user);
+		await this.socket.on('RETURN_USER_INFO', (data) => {
+			this.setState({ user: data });
+		});
 	}
 
 	render() {
-		const { messages, username } = this.state;
+		const { messages, user } = this.state;
 
-		if(username) {
+		if(user) {
 			return (
 				<ChatAppStyle>
-					<ChatHistory messages={messages}/>
+					<ChatHistory messages={messages} userId={user.userId}/>
 					<PostMessage send={this.sendMessage}/>
 				</ChatAppStyle>
 			);
 		} else {
 			return (
 				<ChatAppStyle>
-					<Login setUsername={this.setUsername}/>
+					<Login setUser={this.setUser}/>
 				</ChatAppStyle>
 			);
 		}

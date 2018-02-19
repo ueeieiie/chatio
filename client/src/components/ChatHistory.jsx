@@ -3,7 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Components
-import MessageTemplate from './MessageTemplate';
+//Message Templates
+import UserMessageTemplate from './MessageTemplate/UserMessageTemplate';
+import OthersMessageTemplate from './MessageTemplate/OthersMessageTemplate';
 
 // Component Style
 const ChatHistoryStyle = styled.div`
@@ -20,9 +22,6 @@ class ChatHistory extends React.Component  {
 	}
 
 	setScrollPosition = () => {
-		console.log('scrollTop:', this.chatElement.scrollTop)
-		console.log('scrollHeight:', this.chatElement.scrollHeight)
-
 		this.chatElement.scrollTop = this.chatElement.scrollHeight;
 	}
 
@@ -31,17 +30,26 @@ class ChatHistory extends React.Component  {
 	}
 	
 	render(){
-		const { messages } = this.props;
+		const { messages, userId } = this.props;
 
 		return (
 			<ChatHistoryStyle innerRef={input => this.setRef(input)} >
 				{ 
-					messages.map((m, i) => (
-						<MessageTemplate 
-							key={i} 
-							name={m.username} 
-							message={m.message} 
-						/>)	
+					messages.map((m, i) => 
+						m.userId === userId ? (
+						   <UserMessageTemplate 
+								   key={i} 
+								   name={m.username} 
+								   message={m.message}
+								   avatar={m.avatar} />
+						   )	:	(
+							   <OthersMessageTemplate 
+								   key={i} 
+								   name={m.username} 
+								   message={m.message}
+								   avatar={m.avatar} />
+						   ) 
+					   
 					)
 				}
 			</ChatHistoryStyle>

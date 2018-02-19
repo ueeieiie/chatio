@@ -11,6 +11,8 @@ const AppStyle = styled.div`
 
 	.title {
 		text-align: center;
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		color: #676767;
 	}
 `;
 

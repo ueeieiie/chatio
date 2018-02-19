@@ -7,7 +7,7 @@ const ASSETS_DIR = path.join(__dirname, 'src', 'assets');
 
 
 module.exports = {
-	entry: APP_DIR,
+	entry: ['babel-polyfill', APP_DIR],
 	output: {
 		path: BUILD_DIR,
 		filename: 'bundle.js',

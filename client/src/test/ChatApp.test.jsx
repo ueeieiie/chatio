@@ -1,4 +1,4 @@
-import App from '../components/App';
+import ChatApp from '../components/ChatApp';
 
 describe('PostMessage Component', () => {
 	test("testing", () => {

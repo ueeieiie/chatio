@@ -28,35 +28,49 @@ const LoginStyle = styled.div`
 	}
 `;
 
-const Login = (props) => {
-	let inputUsername;
+export default class Login extends React.Component {
+	state = {
+		disabled: false
+	}
 
-	const onKeyPressHandler = (e) => {
+	onKeyPressHandler = (e) => {
 		if(e.key === 'Enter') {
-			setUsername();
+			this.setState({
+				disabled: true
+			}, this.setUser);
 		}
 	}
 
-	const setUsername = () => {
-		props.setUsername(inputUsername.value);
+	onClickHandler = (e) => {
+		this.setState({
+			disabled
+		},this.setUser);
+
 	}
 
-	const setRef = input => {
+	setUser = () => {
+		this.props.setUser(this.inputUsername.value);
+	}
+
+	setRef = input => {
 		if(input) {
-			inputUsername = input;
-			inputUsername.focus();
+			this.inputUsername = input;
+			this.inputUsername.focus();
 		}
 	}
 
-	return (
-		<LoginStyle>
-			<input type="text" 
-				   ref={input => setRef(input)} 
-				   placeholder="Enter username..."
-				   onKeyPress={onKeyPressHandler}/>
-			<button onClick={setUsername}>Set</button>			
-		</LoginStyle>
-	);
-}
+	render (){
+		const { disabled } = this.state;
 
-export default Login;
+		return (
+			<LoginStyle>
+				<input type="text" 
+					   ref={input => this.setRef(input)} 
+					   placeholder="Enter username..."
+					   onKeyPress={this.onKeyPressHandler} 
+					   disabled={disabled}/>
+				<button onClick={this.onClickHandler}>Set</button>			
+			</LoginStyle>
+		);
+	}
+}
