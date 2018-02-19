@@ -1,4 +1,6 @@
+// Dependencies
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Component Style
@@ -73,4 +75,8 @@ export default class Login extends React.Component {
 			</LoginStyle>
 		);
 	}
+}
+
+Login.propTypes = {
+	setUser: PropTypes.func.isRequired
 }

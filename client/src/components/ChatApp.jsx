@@ -20,19 +20,15 @@ const ChatAppStyle = styled.div`
 export default class ChatApp extends React.Component {
 	constructor() {
 		super();
-
 		this.socket = io('http://localhost:3000');
 
 		const addMessage = async ({userId, username, message, avatar}) => {
-			// console.log({id, username, message, avatar});
-			
 			await this.setState({
 				messages: [
 					...this.state.messages, 
 					{userId, username, message, avatar}
 				]
-			});
-			
+			});	
 		};
 
 		this.socket.on('RECEIVE_MESSAGE', addMessage);

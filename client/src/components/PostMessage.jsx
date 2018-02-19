@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Component Style
@@ -71,5 +72,8 @@ const PostMessage = props => {
 	)
 };
 
-
 export default PostMessage;
+
+PostMessage.propTypes = {
+	send: PropTypes.func.isRequired
+}

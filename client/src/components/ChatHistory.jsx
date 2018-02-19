@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Components
@@ -31,7 +32,7 @@ class ChatHistory extends React.Component  {
 	
 	render(){
 		const { messages, userId } = this.props;
-
+		console.log('userId:', userId);
 		return (
 			<ChatHistoryStyle innerRef={input => this.setRef(input)} >
 				{ 
@@ -58,3 +59,13 @@ class ChatHistory extends React.Component  {
 };
 
 export default ChatHistory;
+
+ChatHistory.propTypes = {
+	messages: PropTypes.arrayOf(PropTypes.shape({
+		userId: PropTypes.string.isRequired,
+		message: PropTypes.string.isRequired,
+		username: PropTypes.string.isRequired,
+		avatar: PropTypes.string.isRequired,
+	})),
+	userId: PropTypes.string.isRequired
+}
