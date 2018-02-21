@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+	"postinstall": "yarn run build",
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.jsx",

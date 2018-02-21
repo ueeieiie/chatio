@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "postinstall": "yarn start",
+    "start": "concurrently \"nodemon index.js\" \"yarn opn\"",
+    "opn": "opn http://localhost:3000"
   },
   "license": "MIT",
   "dependencies": {
+    "concurrently": "^3.5.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "nodemon": "^1.14.12",
