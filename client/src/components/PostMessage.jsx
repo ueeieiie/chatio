@@ -45,6 +45,11 @@ const PostMessage = props => {
 		}
 	}
 
+	const clickHandler = () => {
+		sendMessage(inputText.value);
+		clearInput();
+	}
+
 	const clearInput = () => {
 		inputText.value = '';
 	}
@@ -72,8 +77,6 @@ const PostMessage = props => {
 		}
 	}
 
-	console.log('value:', value);
-
 	return (
 		<PostMessageStyle>
 			<input type="text"
@@ -82,7 +85,7 @@ const PostMessage = props => {
 				ref={input => setRef(input)}
 				onChange={e => value = e.target.value}
 			/>
-			<button onClick={sendMessage}>Send</button>
+			<button onClick={clickHandler}>Send</button>
 		</PostMessageStyle>
 	)
 };
