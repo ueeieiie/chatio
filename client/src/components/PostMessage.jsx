@@ -51,7 +51,6 @@ const PostMessage = props => {
 
 	const setRef = (input) => {
 		if (input) {
-			refElement = input;
 			inputText = input;
 			inputText.focus();
 		}
