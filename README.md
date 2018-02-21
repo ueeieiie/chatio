@@ -10,3 +10,7 @@
 1. `yarn start` to run the server (will work only if project is installed)
 1. Inside the browser: `http://localhost:3000`
 1. Enjoy life! 👩‍💻🌴🍹
+
+#### Run Tests:
+1. `cd client` from root folder
+1. `yarn test`
