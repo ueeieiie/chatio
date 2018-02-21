@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "yarn start",
-    "start": "concurrently \"nodemon index.js\" \"yarn opn\"",
+    "start": "concurrently \"nodemon index.js\" \" yarn run opn\" ",
     "opn": "opn http://localhost:3000"
   },
   "license": "MIT",
@@ -13,6 +13,7 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "nodemon": "^1.14.12",
+    "opn-cli": "^3.1.0",
     "socket.io": "^2.0.4",
     "uuid": "^3.2.1"
   }
