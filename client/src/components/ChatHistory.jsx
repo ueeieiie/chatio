@@ -32,7 +32,7 @@ class ChatHistory extends React.Component  {
 	
 	render(){
 		const { messages, userId } = this.props;
-		console.log('userId:', userId);
+
 		return (
 			<ChatHistoryStyle innerRef={input => this.setRef(input)} >
 				{ 

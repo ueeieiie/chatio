@@ -37,17 +37,16 @@ export default class Login extends React.Component {
 
 	onKeyPressHandler = (e) => {
 		if(e.key === 'Enter') {
-			this.setState({
-				disabled: true
-			}, this.setUser);
+			this.disableInputField();
 		}
 	}
 
 	onClickHandler = (e) => {
-		this.setState({
-			disabled
-		},this.setUser);
+		this.disableInputField()
+	}
 
+	disableInputField = () => {
+		this.setState({ disabled: true },this.setUser);
 	}
 
 	setUser = () => {
@@ -71,7 +70,7 @@ export default class Login extends React.Component {
 					   placeholder="Enter username..."
 					   onKeyPress={this.onKeyPressHandler} 
 					   disabled={disabled}/>
-				<button onClick={this.onClickHandler}>Set</button>			
+				<button onClick={this.onClickHandler}>Set</button>
 			</LoginStyle>
 		);
 	}

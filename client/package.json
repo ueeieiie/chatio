@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.jsx",
     "build": "rimraf dist && webpack -p",
@@ -16,6 +16,10 @@
       "./src/test/jestsetup.js"
     ]
   },
+  "activationEvents": [
+    "workspaceContains:node_modules/.bin/jest",
+    "onCommand:io.orta.jest.start"
+  ],
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "prop-types": "^15.6.0",

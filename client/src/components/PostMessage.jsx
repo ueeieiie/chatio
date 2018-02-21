@@ -34,11 +34,12 @@ const PostMessageStyle = styled.div`
 // PostMessage Component
 const PostMessage = props => {
 	let inputText;
+	let value;
 
 	const onKeypressHandler = (e) => {
 		if (e.key === 'Enter') {
 			if (inputText.value) {
-				sendMessage();
+				sendMessage(inputText.value);
 				clearInput();
 			}
 		}
@@ -50,15 +51,29 @@ const PostMessage = props => {
 
 	const setRef = (input) => {
 		if (input) {
+			refElement = input;
 			inputText = input;
 			inputText.focus();
 		}
 	}
 
-	const sendMessage = () => {
-		props.send(inputText.value);
+	const stringIsBlank = (str) => {
+		return (!str || /^\s*$/.test(str));
 	}
 
+	const formatMessage = (message) => {
+		return stringIsBlank(message) ? false : message.trim();
+	}
+
+	const sendMessage = (message) => {
+		const formatedMessage = formatMessage(message);
+
+		if(formatedMessage) {
+			props.send(formatedMessage);
+		}
+	}
+
+	console.log('value:', value);
 
 	return (
 		<PostMessageStyle>
@@ -66,6 +81,7 @@ const PostMessage = props => {
 				placeholder="Your message..."
 				onKeyPress={onKeypressHandler}
 				ref={input => setRef(input)}
+				onChange={e => value = e.target.value}
 			/>
 			<button onClick={sendMessage}>Send</button>
 		</PostMessageStyle>
