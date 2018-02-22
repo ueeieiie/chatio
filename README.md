@@ -11,6 +11,12 @@
 1. Inside the browser: `http://localhost:3000`
 1. Enjoy life! 👩‍💻🌴🍹
 
-#### Run Tests:
+## Running tests:
+
+#### For client unit tests:
 1. `cd client` from root folder
+1. `yarn test`
+
+#### For server integration tests:
+1. `cd server` from root folder
 1. `yarn test`
