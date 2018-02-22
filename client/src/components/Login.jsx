@@ -47,6 +47,7 @@ export default class Login extends React.Component {
 
 	onClickHandler = (e) => {
 		const username = this.inputUsername.value;
+		
 		if (!this.invalidUsername(username)) {
 			console.log('username is good');
 			this.disableInputField();

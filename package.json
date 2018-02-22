@@ -9,5 +9,6 @@
   "repository": "https://github.com/ueeieiie/chatio.git",
   "author": "ueeieiie <udielenberg@gmail.com>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {}
 }

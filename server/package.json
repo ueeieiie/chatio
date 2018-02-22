@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "yarn start",
+    "test": "mocha",
     "start": "concurrently \"nodemon index.js\" \" yarn run opn\" ",
     "opn": "opn http://localhost:3000"
   },
@@ -16,5 +17,10 @@
     "opn-cli": "^3.1.0",
     "socket.io": "^2.0.4",
     "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1",
+    "supertest": "^3.0.0"
   }
 }
