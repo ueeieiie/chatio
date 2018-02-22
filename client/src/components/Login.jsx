@@ -36,40 +36,56 @@ export default class Login extends React.Component {
 	}
 
 	onKeyPressHandler = (e) => {
-		if(e.key === 'Enter') {
-			this.disableInputField();
+		const username = this.inputUsername.value;
+		
+		if (e.key === 'Enter') {
+			if (!this.invalidUsername(username)) {
+				this.disableInputField();
+			}
 		}
 	}
 
 	onClickHandler = (e) => {
-		this.disableInputField()
-	}
+		const username = this.inputUsername.value;
+		if (!this.invalidUsername(username)) {
+			console.log('username is good');
+			this.disableInputField();
+		}
 
-	disableInputField = () => {
-		this.setState({ disabled: true },this.setUser);
+		console.log('username is BAD');
 	}
-
+	
 	setUser = () => {
 		this.props.setUser(this.inputUsername.value);
 	}
-
+	
 	setRef = input => {
-		if(input) {
+		if (input) {
 			this.inputUsername = input;
 			this.inputUsername.focus();
 		}
 	}
+	
+	invalidUsername = (username) => 
+		!username || /^\s*$/.test(username);
 
-	render (){
+	
+	disableInputField = () => {
+		this.setState({ disabled: true },this.setUser);
+	}
+
+	render() {
 		const { disabled } = this.state;
 
 		return (
 			<LoginStyle>
-				<input type="text" 
-					   ref={input => this.setRef(input)} 
-					   placeholder="Enter username..."
-					   onKeyPress={this.onKeyPressHandler} 
-					   disabled={disabled}/>
+				<input 
+					type="text" 
+					ref={input => this.setRef(input)} 
+					placeholder="Enter username..."
+					onKeyPress={this.onKeyPressHandler} 
+					disabled={disabled} 
+				/>
 				<button onClick={this.onClickHandler}>Set</button>
 			</LoginStyle>
 		);
@@ -78,4 +94,4 @@ export default class Login extends React.Component {
 
 Login.propTypes = {
 	setUser: PropTypes.func.isRequired
-}
+};

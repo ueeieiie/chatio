@@ -34,7 +34,24 @@ const PostMessageStyle = styled.div`
 // PostMessage Component
 const PostMessage = props => {
 	let inputText;
-	let value;
+
+	const stringIsBlank = (str) => 	(!str || /^\s*$/.test(str));
+	
+	const formatMessage = (message) => (
+		stringIsBlank(message) ? false : message.trim()
+	);
+	
+	const sendMessage = (message) => {
+		const formatedMessage = formatMessage(message);
+
+		if (formatedMessage) {
+			props.send(formatedMessage);
+		}
+	};
+	
+	const clearInput = () => {
+		inputText.value = '';
+	};
 
 	const onKeypressHandler = (e) => {
 		if (e.key === 'Enter') {
@@ -43,55 +60,35 @@ const PostMessage = props => {
 				clearInput();
 			}
 		}
-	}
+	};
 
 	const clickHandler = () => {
 		sendMessage(inputText.value);
 		clearInput();
-	}
-
-	const clearInput = () => {
-		inputText.value = '';
-	}
+	};
 
 	const setRef = (input) => {
 		if (input) {
 			inputText = input;
 			inputText.focus();
 		}
-	}
-
-	const stringIsBlank = (str) => {
-		return (!str || /^\s*$/.test(str));
-	}
-
-	const formatMessage = (message) => {
-		return stringIsBlank(message) ? false : message.trim();
-	}
-
-	const sendMessage = (message) => {
-		const formatedMessage = formatMessage(message);
-
-		if(formatedMessage) {
-			props.send(formatedMessage);
-		}
-	}
-
+	};
+	
 	return (
 		<PostMessageStyle>
-			<input type="text"
+			<input 
+				type="text"
 				placeholder="Your message..."
 				onKeyPress={onKeypressHandler}
 				ref={input => setRef(input)}
-				onChange={e => value = e.target.value}
 			/>
 			<button onClick={clickHandler}>Send</button>
 		</PostMessageStyle>
-	)
+	);
 };
 
 export default PostMessage;
 
 PostMessage.propTypes = {
 	send: PropTypes.func.isRequired
-}
+};

@@ -22,11 +22,11 @@ export default class ChatApp extends React.Component {
 		super();
 		this.socket = io('http://localhost:3000');
 
-		const addMessage = async ({userId, username, message, avatar}) => {
+		const addMessage = async ({ userId, username, message, avatar }) => {
 			await this.setState({
 				messages: [
 					...this.state.messages, 
-					{userId, username, message, avatar}
+					{ userId, username, message, avatar }
 				]
 			});	
 		};
@@ -39,11 +39,6 @@ export default class ChatApp extends React.Component {
 		user: null
 	};
 
-	sendMessage = async (message) => {
-		const { user } = this.state;
-		await this.socket.emit('SEND_MESSAGE', {message, user});
-	}
-
 	setUser = async (user) => {
 		await this.socket.emit('REGISTER_USER', user);
 		await this.socket.on('RETURN_USER_INFO', (data) => {
@@ -51,22 +46,29 @@ export default class ChatApp extends React.Component {
 		});
 	}
 
+	sendMessage = async (message) => {
+		const { user } = this.state;
+		await this.socket.emit('SEND_MESSAGE', { message, user });
+	}
+
+
 	render() {
 		const { messages, user } = this.state;
 
-		if(user) {
+		if (user) {
 			return (
 				<ChatAppStyle>
-					<ChatHistory messages={messages} userId={user.userId}/>
-					<PostMessage send={this.sendMessage}/>
-				</ChatAppStyle>
-			);
-		} else {
-			return (
-				<ChatAppStyle>
-					<Login setUser={this.setUser}/>
+					<ChatHistory messages={messages} userId={user.userId} />
+					<PostMessage send={this.sendMessage} />
 				</ChatAppStyle>
 			);
 		}
+
+		return (
+			<ChatAppStyle>
+				<Login setUser={this.setUser} />
+			</ChatAppStyle>
+		);
+		
 	}
 }
