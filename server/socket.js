@@ -26,6 +26,11 @@ module.exports = (io) => {
 			connections.splice(connections.indexOf('socket'), 1);
 			console.log('Disconnected: %s sockets are active', connections.length);
 		})
+
+		socket.on('error', (err) => {
+			throw new Error('Errrrrr');
+			socket.emit('ON_ERROR_EVENT', {err: 'You have an error'})
+		})
 	});
 };
 
